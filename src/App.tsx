@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TodoList from "./components/TodoList";
+import AddTodo from "./components/AddTodo";
+import {useDispatch} from "react-redux";
+import {fetchTodos} from "./data/actions";
 
 function App() {
+    const dispatch = useDispatch()
+    const fetchData = ()=>{
+        dispatch(fetchTodos())
+    }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className="container">
+            <div className="header">
+                <span className='title'>Awesome Todo List</span>
+                <button className='fetch-button' onClick={()=>fetchData()}>Fetch todos</button>
+            </div>
+          <AddTodo />
+          <TodoList/>
+        </div>
+      </div>
   );
 }
 
